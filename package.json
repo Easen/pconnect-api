@@ -8,7 +8,8 @@
         "restify": "*",
         "sky-plus-hd": "dalhundal/sky-plus-hd",
         "q": "*",
-        "sonos": "bencevans/node-sonos"
+        "sonos": "bencevans/node-sonos",
+        "bravia": "Easen/bravia"
     },
     "scripts": {
         "start": "node index.js"
