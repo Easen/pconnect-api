@@ -1,0 +1,16 @@
+{
+    "name": "pebble-connect",
+    "version": "0.0.1",
+    "dependencies": {
+        "halberd": "*",
+        "require-dir": "*",
+        "underscore": "*",
+        "restify": "*",
+        "sky-plus-hd": "./sky-plus-hd/",
+        "q": "*",
+        "sonos": "*"
+    },
+    "scripts": {
+        "start": "node index.js"
+    }
+}
