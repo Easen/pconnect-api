@@ -91,27 +91,21 @@ SonosApp.prototype = {
                     if (volumneStep === undefined) {
                         volumneStep = 3;
                     }
-
-
                     self.coordinator.getVolume(function(error, vol) {
-                        console.log('current vol', vol);
                         vol += volumneStep;
 
                         if (vol > 100) {
                             vol = 100;
-                        }
-                        if (vol < 0) {
+                        } else if (vol < 0) {
                             vol = 0;
                         }
 
-                        console.log('Setting vol', vol, volumneStep);
                         self.coordinator.setVolume(vol, function() {
                             resolve(200);
                         });
                     });
                     break;
                 default:
-                    console.log(id, self);
                     self.coordinator[id].call(self.coordinator);
                     resolve(202);
             }
@@ -150,10 +144,6 @@ module.exports.loadApp = Q.Promise(function (resolve) {
     setTimeout(function () {
         getZones(devices).forEach(function (zone) {
             var coordinator = getZoneCoordinator(zone, devices)
-            if (coordinator !== undefined) {
-                console.log(zone + ' (' + coordinator.ip + ':' + coordinator.port + ')')
-            }
-
             zones.push(
                 new SonosApp(
                     zone,
