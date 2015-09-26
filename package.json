@@ -6,7 +6,7 @@
         "require-dir": "*",
         "underscore": "*",
         "restify": "*",
-        "sky-plus-hd": "./sky-plus-hd/",
+        "sky-plus-hd": "dalhundal/sky-plus-hd",
         "q": "*",
         "sonos": "bencevans/node-sonos"
     },
