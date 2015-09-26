@@ -43,8 +43,9 @@ SkyApp.prototype = {
                 return resolve(404);
             }
             getSkyPlusHD().then(function (skyBox) {
-                skyBox[action].call(this);
-                return resolve(202);
+                skyBox[action].call(this).then(function() {
+                    return resolve(202);
+                });
             });
         });
     }
