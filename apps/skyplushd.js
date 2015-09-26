@@ -42,10 +42,10 @@ SkyApp.prototype = {
             if (self.actions()[action] === undefined) {
                 return resolve(404);
             }
-            getSkyPlusHD().then(function (sky) {
-                sky[action].call(this);
+            getSkyPlusHD().then(function (skyBox) {
+                skyBox[action].call(this);
+                return resolve(202);
             });
-            return resolve(202);
         });
     }
 };
