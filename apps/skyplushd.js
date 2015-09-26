@@ -18,7 +18,7 @@ var getSkyPlusHD = function() {
 var SkyApp = function() {};
 SkyApp.prototype = {
     title: function () {
-        return 'Sky TV';
+        return 'Sky+ HD';
     },
     actions: function () {
         return {
@@ -37,8 +37,9 @@ SkyApp.prototype = {
         };
     },
     invokeAction: function (action) {
+        var self = this;
         return Q.Promise(function (resolve) {
-            if (this.actions()[action] === undefined) {
+            if (self.actions()[action] === undefined) {
                 return resolve(404);
             }
             getSkyPlusHD().then(function (sky) {
