@@ -15,32 +15,40 @@ var getSkyPlusHD = function() {
     return promise;
 };
 
-var skyApp = {
-    title: 'Sky TV',
-    actions: {
-        pause: {
-            title: 'Pause'
-        },
-        play: {
-            title: 'Play'
-        },
-        fwd: {
-            title: 'Fast Forward'
-        },
-        rew: {
-            title: 'Rewind'
-        }
+var SkyApp = function() {};
+SkyApp.prototype = {
+    title: function () {
+        return 'Sky TV';
+    },
+    actions: function () {
+        return {
+            pause: {
+                title: 'Pause'
+            },
+            play: {
+                title: 'Play'
+            },
+            fwd: {
+                title: 'Fast Forward'
+            },
+            rew: {
+                title: 'Rewind'
+            }
+        };
     },
     invokeAction: function (action) {
-        if (skyApp.actions[action] === undefined) {
-            return [404];
-        }
-        getSkyPlusHD().then(function (sky) {
-            sky[action].call(this);
+        return Q.Promise(function (resolve) {
+            if (this.actions()[action] === undefined) {
+                return resolve(404);
+            }
+            getSkyPlusHD().then(function (sky) {
+                sky[action].call(this);
+            });
+            return resolve(202);
         });
-        return [201];
     }
 };
 
-
-module.exports = skyApp;
+module.exports.loadApp = Q.Promise(function (resolve) {
+    resolve(new SkyApp());
+});
