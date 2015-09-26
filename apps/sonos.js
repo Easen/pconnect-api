@@ -101,7 +101,7 @@ SonosApp.prototype = {
                         }
 
                         self.coordinator.setVolume(vol, function() {
-                            resolve(200);
+                            resolve(202);
                         });
                     });
                     break;
