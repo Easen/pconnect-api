@@ -5,7 +5,7 @@ var getBravia = function() {
     if (promise === undefined) {
         promise = Q.Promise(function (resolve, reject, notify) {
             var bravia = require('bravia');
-            bravia('192.168.1.148', function(client) {
+            bravia('192.168.1.14', function(client) {
                 // List available commands
                 client.getCommandNames(function(list) {
                     console.log(list);
@@ -31,11 +31,23 @@ BraviaApp.prototype = {
             PowerOff: {
                 title: 'Power Off'
             },
+            Mute: {
+                title: 'Mute'
+            },
             VolumeUp: {
                 title: 'Vol +'
             },
             VolumeDown: {
                 title: 'Vol -'
+            },
+            Input: {
+                title: 'Input'
+            },
+            Confirm: {
+                title: 'Confirm'
+            },
+            Return: {
+                title: 'Return'
             }
         };
     },
