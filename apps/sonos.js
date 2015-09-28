@@ -81,13 +81,13 @@ SonosApp.prototype = {
             }
         }
     },
-    invokeAction: function (id) {
+    invokeAction: function (action) {
         debug('Received action [%s]', action);
 
         var self = this;
         return Q.Promise(function (resolve) {
             var volumneStep = undefined;
-            switch (id) {
+            switch (action) {
                 case 'decreaseVol':
                     volumneStep = -3;
                 case 'increaseVol':
@@ -109,7 +109,7 @@ SonosApp.prototype = {
                     });
                     break;
                 default:
-                    self.coordinator[id].call(self.coordinator);
+                    self.coordinator[action].call(self.coordinator);
                     resolve(202);
             }
         });
