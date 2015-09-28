@@ -1,5 +1,5 @@
 var sonos = require('sonos');
-var Q = require('Q');
+var Q = require('q');
 var _ = require('underscore');
 
 var TIMEOUT = 2000;
