@@ -7,11 +7,7 @@ var getBravia = function() {
         promise = Q.Promise(function (resolve, reject, notify) {
             var bravia = require('bravia');
             bravia('192.168.1.14', function(client) {
-                // List available commands
-                client.getCommandNames(function(list) {
-                    console.log(list);
-                });
-
+                debug('Resolved the bravia client');
                 resolve(client);
               });
         });
@@ -61,9 +57,10 @@ BraviaApp.prototype = {
                 return resolve(404);
             }
             getBravia().then(function (tv) {
+                debug('Invoking the command [%s]', action);
                 tv.exec.call(tv, action);
+                return resolve(202);
             });
-            return resolve(202);
         });
     }
 };
