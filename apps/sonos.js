@@ -3,7 +3,7 @@ var Q = require('q');
 var _ = require('underscore');
 var debug = require('debug')('pconnect:sonos');
 
-var TIMEOUT = 2000;
+var TIMEOUT = 5000;
 var devices = [];
 
 function getZones(deviceList) {
@@ -83,7 +83,7 @@ SonosApp.prototype = {
     },
     invokeAction: function (id) {
         debug('Received action [%s]', action);
-        
+
         var self = this;
         return Q.Promise(function (resolve) {
             var volumneStep = undefined;
