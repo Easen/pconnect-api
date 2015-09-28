@@ -2,6 +2,7 @@ var hal = require('halberd');
 var requireDir = require('require-dir');
 var _ = require('underscore');
 var restify = require('restify');
+var debug = require('debug')('pconnect');
 
 var connectCollection = new hal.Resource({
     title: 'Connect'
@@ -25,19 +26,27 @@ var renderApp = function(instance, key) {
     resource.embed('item', actions);
     return resource;
 };
+
+
 var connectApps = {}
 _.each(requireDir('./apps'), function (app, key) {
+    debug('Loading [%s]', key);
+
     app.loadApp.then(function (resolvedApps) {
         if (!Array.isArray(resolvedApps)) {
             resolvedApps = [resolvedApps];
         }
-        _.each(resolvedApps, function(resolvedApp, index){
+        debug('Application [%s] has resolved with [%d] apps instances', key, resolvedApps.length);
+
+        _.each(resolvedApps, function(resolvedApp, index) {
             var appKey = key + '_' + index;
             appResources[appKey] = renderApp(resolvedApp, appKey);
             connectApps[appKey] = resolvedApp;
 
             // Update the collection
             connectCollection._embedded['item'] = _.values(appResources);
+
+            debug('Added application instance [%s] with key [%s]', resolvedApp.title(), appKey);
         });
     });
 });
@@ -86,14 +95,18 @@ app.get('/app/:app', function (req, res, next) {
 app.post('/app/:app/action/:action', function (req, res, next) {
     var app = connectApps[req.params.app];
     if (undefined === app) {
+        debug('Cannot find app [%s]', req.params.app);
         return res.send(404);
     }
+    debug('Invoking action [%s] for application [%s]', req.params.action, req.params.app);
     app.invokeAction(req.params.action).then(function(code) {
         res.setHeader('Content-Type', 'application/hal+json');
         res.writeHead(code);
         res.end();
+        debug('Invoked action [%s] for application [%s]', req.params.action, req.params.app);
     });
     return next();
 });
 
 app.listen(8080);
+debug('App server up and running');

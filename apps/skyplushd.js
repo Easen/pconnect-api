@@ -1,4 +1,5 @@
 var Q = require('q');
+var debug = require('debug')('pconnect:sky');
 
 var promise;
 var getSkyPlusHD = function() {
@@ -37,6 +38,8 @@ SkyApp.prototype = {
         };
     },
     invokeAction: function (action) {
+        debug('Received action [%s]', action);
+        
         var self = this;
         return Q.Promise(function (resolve) {
             if (self.actions()[action] === undefined) {

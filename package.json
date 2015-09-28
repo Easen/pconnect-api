@@ -9,7 +9,8 @@
         "sky-plus-hd": "dalhundal/sky-plus-hd",
         "q": "*",
         "sonos": "bencevans/node-sonos",
-        "bravia": "Easen/bravia"
+        "bravia": "Easen/bravia",
+        "debug": "*"
     },
     "scripts": {
         "start": "node index.js"

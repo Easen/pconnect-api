@@ -81,6 +81,8 @@ SonosApp.prototype = {
         }
     },
     invokeAction: function (id) {
+        debug('Received action [%s]', action);
+        
         var self = this;
         return Q.Promise(function (resolve) {
             var volumneStep = undefined;

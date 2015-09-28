@@ -1,4 +1,5 @@
 var Q = require('q');
+var debug = require('debug')('pconnect:sonybravia');
 
 var promise;
 var getBravia = function() {
@@ -52,6 +53,8 @@ BraviaApp.prototype = {
         };
     },
     invokeAction: function (action) {
+        debug('Received action [%s]', action);
+
         var self = this;
         return Q.Promise(function (resolve) {
             if (self.actions()[action] === undefined) {
