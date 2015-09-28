@@ -4,7 +4,7 @@ var _ = require('underscore');
 var restify = require('restify');
 
 var connectCollection = new hal.Resource({
-    title: 'Pebble Connect'
+    title: 'Connect'
 }, '/');
 
 var appResources = {};
@@ -50,7 +50,7 @@ var app = restify.createServer({
                 // snoop for RestError or HttpError, but don't rely on
                 // instanceof
                 res.statusCode = body.statusCode || 500;
-                
+
                 if (body.body) {
                     body = body.body;
                 } else {

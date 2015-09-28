@@ -1,5 +1,5 @@
 {
-    "name": "pebble-connect",
+    "name": "pconnect-api",
     "version": "0.0.1",
     "dependencies": {
         "halberd": "*",
